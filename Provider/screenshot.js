@@ -43,8 +43,13 @@ const screenshot = async (req, res) => {
 
     const browser = await puppeteer.launch({
       headless: true, // Render environment does not have a GUI
-      args: ["--no-sandbox", "--disable-setuid-sandbox"], // These arguments are often necessary on cloud services like Render.
-    });
+      args: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage', // Reduce the size of shared memory, useful on cloud providers
+      ],
+      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined // Use Puppeteer bundled executable path
+  });
 
     const page = await browser.newPage();
 
