@@ -48,7 +48,6 @@ const screenshot = async (req, res) => {
           '--disable-setuid-sandbox',
           '--disable-dev-shm-usage',
       ],
-      userDataDir: '/tmp/user_data', // Temporary data directory
   });
   
 
