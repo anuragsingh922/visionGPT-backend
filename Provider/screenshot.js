@@ -42,14 +42,15 @@ const screenshot = async (req, res) => {
     // });
 
     const browser = await puppeteer.launch({
-      headless: true, // Render environment does not have a GUI
+      headless: true,
       args: [
           '--no-sandbox',
           '--disable-setuid-sandbox',
-          '--disable-dev-shm-usage', // Reduce the size of shared memory, useful on cloud providers
+          '--disable-dev-shm-usage',
       ],
-      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined // Use Puppeteer bundled executable path
+      userDataDir: '/tmp/user_data', // Temporary data directory
   });
+  
 
     const page = await browser.newPage();
 
